@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<div onclick="doIt()">click</div>
+</body>
+
+</html>
+<script>
+	function doIt() {
+
+		//创建一个学生类  
+		var student = new Student("zhangsan", 21, "一年级");
+
+		//测试  
+		console.log("name:" + student.name + "\n" + "age:" + student.age + "\n" + "grade:" + student.grade);
+		// name:zhangsan
+		// age:21
+		// grade:一年级
+	}
+	/*定义一个人类*/
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+	/*定义一个学生类*/
+	function Student(name, age, grade)
+	{
+		console.log('arguments:'+JSON.stringify(arguments));//arguments:{"0":"zhangsan","1":21,"2":"一年级"}
+		Person.apply(this, arguments);
+		this.grade = grade;
+	}
+    //大家可以看到测试结果name:zhangsan age:21  grade:一年级
+    //学生类里面我没有给name和age属性赋值啊,为什么又存在这两个属性的值呢,这个就是apply的神奇之处.  
+</script>

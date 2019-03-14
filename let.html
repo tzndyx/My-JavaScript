@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div onclick="doIt()">click</div>
+		<input type="tel" name="" id="aaa" value="" />
+	</body>
+</html>
+<script>
+	function doIt() {
+		var ss = document.getElementById("aaa").value;
+		for(let i = 0;i<ss;i++){
+			setTimeout(function(){
+				console.log(i); //0  到  6   每次迭代都是一个块作用域，let的值只在块作用于中有效，每次迭代的值都会保留
+			},1000)
+		}
+		for(var i = 0;i<ss;i++){
+			setTimeout(function(){
+				console.log(i); // 7 个  7          闭包，i的值会一直保留，直到最后输出时 i的值为 7
+			},1000)
+		}
+	}
+</script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<div onclick="doIt()">click</div>
+</body>
+
+</html>
+<script>
+	var foo1 = model1();
+
+	function doIt() {
+		foo1.doSomething1();
+		foo1.doAnother2();
+		foo2.doSomething1();
+		foo2.doAnother2();
+	}
+
+	function model1() {
+		var someThing = 'cool';
+		var another = [1, 2, 3];
+		function doSomething() {
+			console.log(someThing)
+		}
+		function doAnother() {
+			console.log(another.join('+'))
+		}
+		return {
+			doSomething1: doSomething,
+			doAnother2: doAnother
+		}
+	}
+
+	var foo2 = (function () {  //一样的效果，但这个却是单例模式
+		var someThing = 'cool';
+		var another = [1, 2, 3];
+		function doSomething() {
+			console.log(someThing)
+		}
+		function doAnother() {
+			console.log(another.join('+'))
+		}
+		return {
+			doSomething1: doSomething,
+			doAnother2: doAnother
+		}
+	})()
+
+	//***********现代的模块机制************
+	//这个是模块的管理器，通过这个可以生成新的模块
+	//通过研究这个，可以看出现代的模块的生成机制
+	var MyModules = (function Manager() {           //单例模式----只有一个模块管理器
+		var modules = {};
+		//name:要定义的模块名  deps:传入已有的模块名（数组形式） impl:function函数，用来描述要定义的模块的逻辑
+		function define(name, deps, impl) {   
+			for (var i = 0; i < deps.length; i++) {
+				deps[i] = modules[deps[i]];  //在模块列表中查找传入的现有模块，并将模块名替换为对应的模块对象
+			}
+
+			//modules--所有模块的模块列表  deps--传入的模块的模块列表 
+			modules[name] = impl.apply(impl, deps);
+			//impl.apply(impl, deps) 将传入的模块作为参数传入要实现的模块的函数里去，让新的模块可以调用传入的模块？？？
+			//modules[name] = object 新的模块传入modules这个模块管理列表里去
+		}
+		function get(name) {
+			return modules[name]; 
+		}
+		return {
+			define: define,
+			get: get
+		};
+	})();
+	// 	这段代码的核心是modules[name] = impl.apply(impl, deps)。为了模块的定义引入了包装函数（可以传入任何依赖），
+	// 并且将返回值，也就是模块的API，储存在一个根据名字来管理的模块列表中。下面展示了如何使用它来定义模块：
+
+	MyModules.define("bar", [], function () {
+		function hello(who) {
+			return "Let me introduce: " + who;
+		}
+		return {
+			hello: hello
+		};
+	});
+	MyModules.define("foo", ["bar"], function (bar) {  //引入现有的模块来帮助定义新的模块
+		var hungry = "hippo";
+		function awesome() {
+			console.log(bar.hello(hungry).toUpperCase());
+		}
+		return {
+			awesome: awesome
+		};
+	});
+	var bar = MyModules.get("bar");
+	var foo = MyModules.get("foo");
+	console.log( bar.hello("hippo") );  // Let me introduce: hippo
+	foo.awesome(); // LET ME INTRODUCE: HIPPO
+	// "foo" 和"bar" 模块都是通过一个返回公共API 的函数来定义的。"foo" 甚至接受"bar" 的示例作为依赖参数，并能使用它。
+</script>
