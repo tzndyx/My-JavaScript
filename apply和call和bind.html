@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<div onclick="doIt()">click</div>
+	
+	<div onclick="doBind()">click to test bind</div>
+</body>
+
+</html>
+<script>
+	function doIt() {
+		//创建一个学生类  
+		var student = new Student("zhangsan", 21, "一年级");
+
+		//测试  
+		console.log("name:" + student.name + "\n" + "age:" + student.age + "\n" + "grade:" + student.grade);
+		// name:zhangsan
+		// age:21
+		// grade:一年级
+	}
+	/*定义一个人类*/
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+	/*定义一个学生类*/
+	function Student(name, age, grade)
+	{
+		console.log('arguments:'+JSON.stringify(arguments));//arguments:{"0":"zhangsan","1":21,"2":"一年级"}
+		Person.apply(this, arguments);
+		this.grade = grade;
+	}
+    //大家可以看到测试结果name:zhangsan age:21  grade:一年级
+	//学生类里面我没有给name和age属性赋值啊,为什么又存在这两个属性的值呢,这个就是apply的神奇之处. 
+	
+	//********bind*********
+	function doBind(){
+		var doWrite = document.write;      //此时，doWrite 指代的就是 write()
+		//doWrite()函数改变this的指向global或window对象，导致执行时提示非法调用异常
+		doWrite('hi');           //直接这样会报错，因为这里的 doWrite是window对象去执行的，相当于 window.write('hi')
+								//然而，window没有write()方法，document对象才有，此时就会报错
+		// 将方法从对象中拿出来，再调用，容易出问题，以为this的指向会出问题
+		doWrite.bind(document)('hi');//bind方法可以指定一个this对象，使得不管怎么调用，this的指向都不变
+	}
+</script>
