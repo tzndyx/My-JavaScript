@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div>计时器：<output id="result">0</output></div>
+		<button onclick="startw()">点击开始</button>
+		<button onclick="stopw()">点击结束</button>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var w;
+	function startw() {
+		if(typeof(Worker) !== 'undefined') {
+			if(typeof(w) == 'undefined') {
+				w = new Worker('js/webWorker.js');
+			}
+			w.onmessage = function(event) {
+				document.getElementById("result").innerHTML = event.data;
+			}
+		} else {
+			alert('该浏览器不支持web Worker');
+		}
+	}
+	function stopw(){
+		w.terminate();
+	}
+</script>
+<!--<!DOCTYPE html>
+<html>
+
+	<body>
+		<p>Count numbers: <output id="result"></output></p>
+		<button onclick="startWorker()">Start Worker</button>
+		<button onclick="stopWorker()">Stop Worker</button>
+		<br /><br />
+		<script>
+			var w;
+
+			function startWorker() {
+				if(typeof(Worker) !== "undefined") {
+					if(typeof(w) == "undefined") {
+						w = new Worker("js/webWorker.js");
+					}
+					w.onmessage = function(event) {
+						document.getElementById("result").innerHTML = event.data;
+					};
+				} else {
+					document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+				}
+			}
+
+			function stopWorker() {
+				w.terminate();
+			}
+		</script>
+	</body>
+
+</html>-->

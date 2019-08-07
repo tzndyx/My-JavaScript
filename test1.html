@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>阶乘五种计算方法</title>
+    <script type="text/javascript">
+        /*use strict*/
+        /* 方法一 尾递归的优化*/
+        //构建一个带尾递归的函数。因为它会返回自身调用的结果，所以它是尾递归
+        //JavaScript 当前没有对这种形式的递归做出优化
+        var factorial = function factorial(i, a) {
+            console.log(i, a);
+            a = a || 1;
+            console.log(i, a);
+            if (i < 2) {
+                return a;
+            }
+            // return factorial(i-1,a*i);
+            return factorial(i - 1, a * i);
+        };
+        console.log("这是上面4的阶乘1：", factorial(4));
+
+        /*方法二*/
+        // 用arguments.callee可以不用管函数名变还是不变都可以用
+        function fac(num) {
+            if (num <= 1) {
+                return 1;
+            } else {
+                // 闭包
+                return num * fac(--num); //方法一
+                //return num*fac(num-1); //方法二
+                // return num*arguments.callee(num-1);//方法三
+                // return num*arguments.callee(--num);//方法四
+                /*但在严格模式下不能通过脚本访问arguments.callee*/
+            }
+        }
+        var result = fac(4);
+        console.log("这是下面4的阶乘2：", result);
+        // 方法三
+        var factorial = function fac(num) {
+            if (num <= 1) {
+                return 1;
+            } else {
+                // 闭包
+                return num * fac(num - 1);
+
+            }
+        }
+        var result = factorial(4);
+        console.log("这是最后下面4的阶乘3：", result);
+
+
+        // 方法四
+        function fac(n) {
+            return n > 1 ? n * fac(n - 1) : 1;
+        }
+        console.log("方法四结果", fac(4));
+        // ECAMscript不存在块级作用域在循环内部定义的变量也可以在外部访问
+        // JS 确实有函数作用域【但不存在块级作用域】。那就意味着定义在函数中的参数和变量在函数外部是不可见的。而在一个函数内部任何位置定义的变量，在该函数的内部任何地方都可见。
+
+
+        //方法五 for循环 (使用循环语句)
+        function test1(num) {
+            for (var i = num - 1; i >= 1; i--) {
+                num *= i;
+            }
+            return num;
+        }
+        console.log("for循环递归", test1(5));
+
+        // 方法六 white循环
+        function test2(num) {
+            var result = num;
+            while (num > 1) {
+                num--;
+                result *= num;
+            }
+            return result;
+        }
+        console.log("while循环递归4", test2(4));
+        //5的阶乘求和
+        function test3(num) {
+            var n = num;
+
+            var total = 0;
+            for (var i = 1; i <= n; i++) {
+                var temp = 1;
+                for (var j = i; j >= 1; j--) {
+                    temp *= j;
+                }
+                total += temp;
+            }
+            return total;
+        }
+        console.log("5的阶乘总和为5" + test3(5))
+
+        /* label 标识
+        使用label可以在代码中添加标签，以便将来使用
+        label : for(int i=0;i<10;i++){
+        if(i == 5){
+        break label;
+        }
+        }
+            循环关键字
+               break 跳出循环体
+               continue 结束本次循环，进行下一次循环*/
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

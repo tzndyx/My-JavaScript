@@ -1,0 +1,97 @@
+.bgfb{
+    background-color: #fbefdf;
+}
+.bgb0{
+    background-color: #b0ffe1;
+}
+#logController p{
+    line-height: 10px
+}
+.disinline{
+    display: inline-block;
+}
+.colblue{
+    color: #5c6ccd
+}
+.mg_l3p{
+    margin-left: 3%;
+}
+.wid35p{
+    width: 25%;
+}
+.wid30p{
+    width: 30%;
+}
+.wid38p{
+    width: 38%;
+}
+.wid40p{
+    width: 40%;
+}
+.wid50p{
+    width: 50%;
+}
+.wid60p{
+    width: 60%;
+}
+.wid70p{
+    width: 70%;
+}
+.heig350{
+    height: 350px;
+}
+.heig380{
+    height: 380px;
+}
+.heig820{
+    height: 820px;
+}
+.text_c{
+    text-align: center;
+}
+.ver_top{
+    vertical-align: top;
+}
+.posabs{
+    position: absolute;
+}
+.left0{
+    left: 0;
+}
+.left50p{
+    left: 50%;
+}
+.right0{
+    right: 0;
+}
+.top0{
+    margin-top: 0;
+}
+.bottom0{
+    bottom: 0;
+}
+.overscrol{
+    overflow: scroll
+}
+
+/* 列表信息样式统一 */
+.towSide{
+    width: 500px;
+}
+.towSide div:first-child {
+    display: inline-block;
+    width: 45%;
+    text-align: left;
+    padding: 2px;
+    font-size: 15px;
+}
+.towSide div:last-child {
+    display: inline-block;
+    width: 45%;
+    text-align: right;
+    padding: 2px;
+    font-size: 15px;
+}
+.childP-indent p{
+    text-indent: 10px
+}

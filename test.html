@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div onclick="doIt()">click</div>
+		<input type="tel" name="" id="aaa" value="" />
+		<p>--------------------</p>
+		男<input type="radio" name="sex" value="0">　　 　　　　　 女<input type="radio" name="sex" value="1">
+
+		<input type="text" id="zhengze" />
+		<input type="button" name="" id="" value="点击" onclick="doIt2()" />
+
+		<br />
+		<input type="date" name="" id="time1" value="" />
+		<p onclick="doIt3(1)">type = date</p>
+
+		<input type="time" name="" id="time2" value="" />
+		<p onclick="doIt3(2)">type = time</p>
+
+=================================================================
+		<input type="text" name="" id="fen" value="" />
+		<div id="" onclick="test3()">
+			test3 分转元
+		</div>
+=================================================================
+		<div onclick="doit5('512521')">
+			时分秒
+		</div>
+		<div onclick="doit6()">
+			异步机制
+		</div>
+	</body>
+
+</html>
+<script>
+	function doIt() {
+		var ss = document.getElementById("aaa").value;
+		console.log(ss);
+		console.log(ss.length);
+	}
+
+	function doIt2() {
+		//		var ss = document.getElementById("zhengze");
+		//		var newValue = ss.value;
+		var reg1 = /^(.).+(.)$/g;
+		var reg2 = /.+(.)$/g;
+		var str = "一";
+		var b = str.replace(reg1, "$1*$2");
+		console.log(b)
+		b = str.replace(reg2, "*$1");
+		console.log(b)
+
+		console.log('==========')
+		str = "一二";
+		b = str.replace(reg1, "$1*$2");
+		console.log(b)
+		b = str.replace(reg2, "*$1");
+		console.log(b)
+
+		console.log('==========')
+		str = "一二三";
+		b = str.replace(reg1, "$1*$2");
+		console.log(b)
+		b = str.replace(reg2, "*$1");
+		console.log(b)
+
+		console.log('==========')
+		str = "一二三四";
+		b = str.replace(reg1, "$1*$2");
+		console.log(b)
+		b = str.replace(reg2, "*$1");
+		console.log(b)
+
+		//		ss.value = regexp_replace(newValue,'(.)','*',2,1);
+	}
+
+	function doIt3(type) {
+		if(type == 1) {
+			var log = document.getElementById("time1").value
+		}
+		if(type == 2) {
+			var log = document.getElementById("time2").value
+		}
+		console.log(log)
+
+	}
+
+	function doit4(input) {
+		if(input !== undefined) {
+			input = input.toString();
+			let s1 = input.substring(0, input.length - 2)
+			let s2 = input.substring(input.length - 2, input.length)
+			input = parseFloat(s1) + '.' + s2;
+		}
+		console.log(input);
+	};
+
+	function doit5(input) {
+		if(input !== undefined) {
+			if(/^\d{6}$/g.test(input) == true) {
+				input = input.substring(0, 2) + ':' + input.substring(2, 4) + ":" + input.substring(4, 6)
+			}
+			console.log(input);
+		}
+		console.log(input);
+	}
+
+	var num = "00999.01";
+
+	function doit6() {
+		//		var s = test1(num);
+		var s = test2(4);
+		console.log(s)
+	}
+
+	function test1(args) {
+		var list = args.split(".");
+		if(list[0] != "0" && args.charAt(0) == "0") {
+			args = args.substring(1, args.length);
+			test(args);
+		} else {
+			console.log("结果" + args);
+			var aaa = args;
+			return aaa;
+		}
+	}
+
+	function test2(args) {
+		if(args < 5) {
+			args += 1;
+			test2(args)
+		} else {
+			return args
+		}
+	}
+
+	function test3() {
+		var input = document.getElementById("fen").value
+		if(input !== undefined) {
+			console.error(input.length)
+			if(parseFloat(input) == 0) {
+				console.log('0') 
+			}
+			if(input.length < 2){
+				input = '0.0' + input
+			}else if(input.length == 2){
+				input = '0.' + input
+			}else{
+				var s1 = input.substring(0, input.length - 2)
+				var s2 = input.substring(input.length - 2, input.length)
+				input = Number(s1) + '.' + s2;
+			}
+		}
+		console.log(input);
+	}
+</script>

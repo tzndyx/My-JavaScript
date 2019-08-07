@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/main2.js"></script>
+	<script type="text/javascript" src="js/main3.js"></script>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<!-- 视图区域 -->
+	<div id="viewArea" class="bgb0 wid60p posabs left0 heig820 overscrol childP-indent">
+		<div class="text_c">展示面板</div>
+		<br>
+		<div class="heig380">
+			<div class="disinline wid30p heig350 ver_top">
+				<div class="text_c colblue">main.js的测试区域</div>
+				<p onclick="doResult()">执行闭包实现累加</p>
+				<p onclick="doResult2()">执行闭包实现私有变量</p>
+				<p onclick="doResult3()">柯裡化实现測試</p>
+				<p onclick="doResult4()">普通实现1測試</p>
+				<p onclick="doResult5()">普通实现2測試</p>
+				<p onclick="doResult6()">闭包实现函数的重载測試</p>
+				<p onclick="doResult7()">下个工作日计算測試</p>
+				<p onclick="doit()">普通測試</p>
+			</div>
+			<div class="disinline wid38p heig350 ver_top">
+				<div class="text_c colblue">main2.js的测试区域</div>
+				<p onclick="execute()">斐波那契数列 Memoization</p>
+				<p onclick="execute1()">斐波那契数列 自己实现的</p>
+				<p onclick="execute2()">斐波那契数列 普通方法</p>
+				<p onclick="execute3()">阶乘 自己实现的</p>
+				<p onclick="execute4()">通用的 Memoize 方法</p>
+				<p onclick="execute5()">伪数组</p>
+			</div>
+			<div class="disinline wid30p heig350 ver_top">
+				<div class="text_c colblue">main3.js的测试区域</div>
+				<p onclick="run()">memoization 通用的实现</p>
+				<p onclick="run1()">js高阶函数 map</p>
+				<p onclick="run2()">js高阶函数 reduce</p>
+				<p onclick="run3()">计算工作时间</p>
+				<p onclick="run4()">数组</p>
+			</div>
+		</div>
+		<div class="heig380">
+			<div class="disinline wid30p heig350 ver_top">
+				<div class="text_c colblue">main4.js的测试区域</div>
+				
+			</div>
+			<div class="disinline wid38p heig350 ver_top">
+				<div class="text_c colblue">main5.js的测试区域</div>
+				
+			</div>
+			<div class="disinline wid30p heig350 ver_top">
+				<div class="text_c colblue">main6.js的测试区域</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- 日志打印区域 -->
+	<div id="logController" class="bgfb posabs wid40p right0 heig820 overscrol childP-indent">
+		<div class="text_c">日志打印</div>
+	</div>
+	<!-- 清空按钮 -->
+	<button onclick="clearLog()" class="posabs bottom0 left50p">清空</button>
+</body>
+
+</html>
